@@ -1,28 +1,425 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Get started — rbitcoin</title><meta name="description" content="Choose a Linux binary, try signet, and plan a mainnet archive."><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#ffffff"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='white'/%3E%3Ctext x='18' y='47' font-family='Arial' font-size='48' fill='%231d1d1b'%3Er%3C/text%3E%3C/svg%3E"><script src="../assets/theme.js?v=icon-theme"></script><link rel="stylesheet" href="../assets/site.css?v=visual-balance"><script src="../assets/code-copy.js" defer></script></head><body class="site essential-site reading-page"><a class="skip" href="#main">Skip to content</a><div class="chapter-grid"><header class="chapter-sidebar"><a class="chapter-brand" href="../index.html"><img class="wordmark wordmark-light" src="../assets/wordmark-light.svg?v=updated-logo" width="2728" height="526" alt="rbitcoin"><img class="wordmark wordmark-dark" src="../assets/wordmark-dark.svg?v=updated-logo" width="2728" height="526" alt="rbitcoin"></a><nav class="chapter-nav" aria-label="Site"><a href="../index.html">Home</a><a href="index.html" aria-current="page"><span>01</span>Get started</a><a href="../architecture/index.html"><span>02</span>Architecture</a><a href="../wallets/index.html"><span>03</span>Wallet backends</a><a href="../security/index.html"><span>04</span>Security</a><a href="../about/index.html"><span>05</span>About</a></nav></header><main class="chapter" id="main">
-<header class="chapter-title"><p class="chapter-kicker">01 / Get started</p><h1>Start with signet.</h1><p class="chapter-intro">Download rbitcoin for Linux and try it on Bitcoin’s test network. Check that it connects and starts syncing before moving to mainnet.</p></header>
-<nav class="chapter-contents" aria-label="On this page"><a href="#download">Download</a><a href="#signet">Try signet</a><a href="#sync">Keep syncing</a><a href="#mainnet">Before mainnet</a></nav>
-<section id="download"><h2>Download rbitcoin</h2><p>Download <a href="https://github.com/reardencode/rbitcoin/releases/tag/v0.7.0">v0.7.0</a> for your platform. Save the node, CLI, and checksum file in a new working directory.</p>
-<ul class="download-files" role="list"><li><div class="download-platform"><span>Linux</span><span class="download-arch">x86_64</span></div><div class="download-links"><a href="https://github.com/reardencode/rbitcoin/releases/download/v0.7.0/rbitcoin-node-x86_64-linux" aria-label="Node for Linux x86_64">Node</a> <a href="https://github.com/reardencode/rbitcoin/releases/download/v0.7.0/rbitcoin-cli-x86_64-linux" aria-label="CLI for Linux x86_64">CLI</a> <a href="https://github.com/reardencode/rbitcoin/releases/download/v0.7.0/SHA256SUMS.linux-musl" aria-label="Checksums for Linux x86_64">Checksums</a></div></li><li><div class="download-platform"><span>Windows</span><span class="download-arch">x86_64</span></div><div class="download-links"><a href="https://github.com/reardencode/rbitcoin/releases/download/v0.7.0/rbitcoin-node-x86_64-windows.exe" aria-label="Node for Windows x86_64">Node</a> <a href="https://github.com/reardencode/rbitcoin/releases/download/v0.7.0/rbitcoin-cli-x86_64-windows.exe" aria-label="CLI for Windows x86_64">CLI</a> <a href="https://github.com/reardencode/rbitcoin/releases/download/v0.7.0/SHA256SUMS.windows" aria-label="Checksums for Windows x86_64">Checksums</a></div></li><li><div class="download-platform"><span>macOS / Darwin</span><span class="download-arch">Apple Silicon</span></div><div class="download-links"><a href="https://github.com/reardencode/rbitcoin/releases/download/v0.7.0/rbitcoin-node-aarch64-darwin" aria-label="Node for macOS / Darwin — Apple Silicon">Node</a> <a href="https://github.com/reardencode/rbitcoin/releases/download/v0.7.0/rbitcoin-cli-aarch64-darwin" aria-label="CLI for macOS / Darwin — Apple Silicon">CLI</a> <a href="https://github.com/reardencode/rbitcoin/releases/download/v0.7.0/SHA256SUMS.darwin" aria-label="Checksums for macOS / Darwin — Apple Silicon">Checksums</a></div></li></ul>
-<p class="annotation">Linux is the main supported path. Windows and macOS builds are less-tested snapshots; macOS builds are not notarized. <a href="https://github.com/reardencode/rbitcoin/blob/v0.7.0/OPERATOR.md#build">Windows and macOS setup notes</a>.</p>
-<p><strong>Continue on Linux.</strong> The commands below use Linux x86_64. In a terminal, open your download directory. Rename the binaries to match the checksum file, then verify them:</p><figure class="command-block"><figcaption><span id="verify-label">Verify the download</span><button class="copy-command" type="button" aria-label="Copy verify the download command" hidden><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 3V2.5h-8v8H3"/></svg><span>Copy</span></button></figcaption><pre tabindex="0" aria-labelledby="verify-label"><code>mv rbitcoin-node-x86_64-linux rbitcoin-node
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <title>Get started — rbitcoin</title>
+    <meta
+      content="Choose a Linux binary, try signet, and plan a mainnet archive."
+      name="description"
+    />
+    <meta content="#ffffff" name="theme-color" />
+    <link href="../assets/img/favicon.svg" rel="icon" type="image/svg+xml" />
+    <script src="../assets/theme.js?v=text-toggle"></script>
+    <link href="../assets/site.css?v=archive-comparison" rel="stylesheet" />
+    <script defer="" src="../assets/code-copy.js?v=addresses"></script>
+    <link href="https://rbitcoin.org/get-started/" rel="canonical" />
+    <link href="../site.webmanifest" rel="manifest" />
+    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+    <meta content="website" property="og:type" />
+    <meta content="rbitcoin" property="og:site_name" />
+    <meta content="Get started — rbitcoin" property="og:title" />
+    <meta
+      content="Choose a Linux binary, try signet, and plan a mainnet archive."
+      property="og:description"
+    />
+    <meta content="https://rbitcoin.org/get-started/" property="og:url" />
+    <meta content="https://rbitcoin.org/assets/img/og-card.png" property="og:image" />
+    <meta content="1200" property="og:image:width" />
+    <meta content="630" property="og:image:height" />
+    <meta content="rbitcoin" property="og:image:alt" />
+    <meta content="summary_large_image" name="twitter:card" />
+    <script defer="" src="../assets/release.js"></script>
+  </head>
+  <body class="site essential-site reading-page">
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="chapter-grid">
+      <header class="chapter-sidebar">
+        <a class="chapter-brand" href="../index.html"
+          ><img
+            alt="rbitcoin"
+            class="wordmark wordmark-light"
+            height="526"
+            src="../assets/wordmark-light.svg?v=updated-logo"
+            width="2728" /><img
+            alt="rbitcoin"
+            class="wordmark wordmark-dark"
+            height="526"
+            src="../assets/wordmark-dark.svg?v=readable-dark"
+            width="2728"
+        /></a>
+        <nav aria-label="Site" class="chapter-nav">
+          <a href="../index.html">Home</a
+          ><a aria-current="page" href="index.html"><span>01</span>Get started</a
+          ><a href="../architecture/index.html"><span>02</span>Architecture</a
+          ><a href="../wallets/index.html"><span>03</span>Wallet backends</a
+          ><a href="../security/index.html"><span>04</span>Security</a
+          ><a href="../about/index.html"><span>05</span>About</a>
+        </nav>
+      </header>
+      <main class="chapter" id="main">
+        <header class="chapter-title">
+          <p class="chapter-kicker">01 / Get started</p>
+          <h1>Run rbitcoin.</h1>
+          <p class="chapter-intro">
+            Download rbitcoin for Linux and try it on Bitcoin’s test network. Check that it connects
+            and starts syncing before moving to mainnet.
+          </p>
+        </header>
+        <nav aria-label="On this page" class="chapter-contents">
+          <a href="#download">Download</a><a href="#signet">Try signet</a
+          ><a href="#sync">Keep syncing</a><a href="#mainnet">Before mainnet</a>
+        </nav>
+        <section id="download">
+          <h2>Download rbitcoin</h2>
+          <p>
+            Download
+            <a data-release-link="" href="https://github.com/reardencode/rbitcoin/releases/latest"
+              >the latest release</a
+            >
+            for your platform. Save the node, CLI, and checksum file in a new working directory.
+          </p>
+          <ul class="download-files" role="list">
+            <li>
+              <div class="download-platform">
+                <span>Linux</span><span class="download-arch">x86_64</span>
+              </div>
+              <div class="download-links">
+                <a
+                  aria-label="Node for Linux x86_64"
+                  data-release-asset="rbitcoin-node-x86_64-linux"
+                  href="https://github.com/reardencode/rbitcoin/releases/latest/download/rbitcoin-node-x86_64-linux"
+                  >Node</a
+                >
+                <a
+                  aria-label="CLI for Linux x86_64"
+                  data-release-asset="rbitcoin-cli-x86_64-linux"
+                  href="https://github.com/reardencode/rbitcoin/releases/latest/download/rbitcoin-cli-x86_64-linux"
+                  >CLI</a
+                >
+                <a
+                  aria-label="Checksums for Linux x86_64"
+                  data-release-asset="SHA256SUMS.linux-musl"
+                  href="https://github.com/reardencode/rbitcoin/releases/latest/download/SHA256SUMS.linux-musl"
+                  >Checksums</a
+                >
+              </div>
+            </li>
+            <li>
+              <div class="download-platform">
+                <span>Windows</span><span class="download-arch">x86_64</span>
+              </div>
+              <div class="download-links">
+                <a
+                  aria-label="Node for Windows x86_64"
+                  data-release-asset="rbitcoin-node-x86_64-windows.exe"
+                  href="https://github.com/reardencode/rbitcoin/releases/latest/download/rbitcoin-node-x86_64-windows.exe"
+                  >Node</a
+                >
+                <a
+                  aria-label="CLI for Windows x86_64"
+                  data-release-asset="rbitcoin-cli-x86_64-windows.exe"
+                  href="https://github.com/reardencode/rbitcoin/releases/latest/download/rbitcoin-cli-x86_64-windows.exe"
+                  >CLI</a
+                >
+                <a
+                  aria-label="Checksums for Windows x86_64"
+                  data-release-asset="SHA256SUMS.windows"
+                  href="https://github.com/reardencode/rbitcoin/releases/latest/download/SHA256SUMS.windows"
+                  >Checksums</a
+                >
+              </div>
+            </li>
+            <li>
+              <div class="download-platform">
+                <span>macOS / Darwin</span><span class="download-arch">Apple Silicon</span>
+              </div>
+              <div class="download-links">
+                <a
+                  aria-label="Node for macOS / Darwin — Apple Silicon"
+                  data-release-asset="rbitcoin-node-aarch64-darwin"
+                  href="https://github.com/reardencode/rbitcoin/releases/latest/download/rbitcoin-node-aarch64-darwin"
+                  >Node</a
+                >
+                <a
+                  aria-label="CLI for macOS / Darwin — Apple Silicon"
+                  data-release-asset="rbitcoin-cli-aarch64-darwin"
+                  href="https://github.com/reardencode/rbitcoin/releases/latest/download/rbitcoin-cli-aarch64-darwin"
+                  >CLI</a
+                >
+                <a
+                  aria-label="Checksums for macOS / Darwin — Apple Silicon"
+                  data-release-asset="SHA256SUMS.darwin"
+                  href="https://github.com/reardencode/rbitcoin/releases/latest/download/SHA256SUMS.darwin"
+                  >Checksums</a
+                >
+              </div>
+            </li>
+          </ul>
+          <p class="annotation">
+            Linux is the main supported path. Windows and macOS builds are less-tested snapshots;
+            macOS builds are not notarized.
+            <a
+              data-release-doc="OPERATOR.md#build"
+              href="https://github.com/reardencode/rbitcoin/blob/master/OPERATOR.md#build"
+              >Windows and macOS setup notes</a
+            >.
+          </p>
+          <p>
+            <strong>Continue on Linux.</strong> The commands below use Linux x86_64. In a terminal,
+            open your download directory. Rename the binaries to match the checksum file, then
+            verify them:
+          </p>
+          <figure class="command-block">
+            <figcaption>
+              <span id="verify-label">Verify the download</span
+              ><button
+                aria-label="Copy verify the download command"
+                class="copy-command"
+                hidden=""
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  fill="none"
+                  height="14"
+                  stroke="currentColor"
+                  stroke-width="1.2"
+                  viewBox="0 0 16 16"
+                  width="14"
+                >
+                  <rect height="8" rx="1" width="8" x="5.5" y="5.5"></rect>
+                  <path d="M10.5 3V2.5h-8v8H3"></path></svg
+                ><span>Copy</span>
+              </button>
+            </figcaption>
+            <pre
+              aria-labelledby="verify-label"
+              tabindex="0"
+            ><code>mv rbitcoin-node-x86_64-linux rbitcoin-node
 mv rbitcoin-cli-x86_64-linux rbitcoin-cli
-sha256sum --check SHA256SUMS.linux-musl</code></pre><p class="copy-status" role="status" aria-live="polite"></p></figure>
-<p class="annotation">Both files should report <code>OK</code>. If either fails, stop and download the files again from the same release.</p><p>Make the binaries executable and check that the node starts:</p><figure class="command-block"><figcaption><span id="prepare-label">Check the binary</span><button class="copy-command" type="button" aria-label="Copy check the binary command" hidden><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 3V2.5h-8v8H3"/></svg><span>Copy</span></button></figcaption><pre tabindex="0" aria-labelledby="prepare-label"><code>chmod +x rbitcoin-node rbitcoin-cli
-./rbitcoin-node --help</code></pre><p class="copy-status" role="status" aria-live="polite"></p></figure>
-<p class="annotation">You should see the command-line help. Run the remaining commands from this directory.</p>
-<p class="annotation"><strong>Already running rbitcoin?</strong> Read the <a href="https://github.com/reardencode/rbitcoin/blob/v0.7.0/CHANGELOG.md#070--2026-09-18">upgrade notes</a> before opening an existing data directory. Upgrading from 0.6.x requires rebuilding the archive.</p>
-<details class="build-option" id="build"><summary>Build with Nix instead</summary><p>With Git and Nix installed on Linux x86_64, build the same release from its pinned source and lockfile:</p><figure class="command-block"><figcaption><span id="nix-build-label">Build with Nix</span><button class="copy-command" type="button" aria-label="Copy build with nix command" hidden><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 3V2.5h-8v8H3"/></svg><span>Copy</span></button></figcaption><pre tabindex="0" aria-labelledby="nix-build-label"><code>git clone --branch v0.7.0 --depth 1 \
+sha256sum --check SHA256SUMS.linux-musl</code></pre>
+            <p aria-live="polite" class="copy-status" role="status"></p>
+          </figure>
+          <p class="annotation">
+            Both files should report <code>OK</code>. If either fails, stop and download the files
+            again from the same release.
+          </p>
+          <p>Make the binaries executable and check that the node starts:</p>
+          <figure class="command-block">
+            <figcaption>
+              <span id="prepare-label">Check the binary</span
+              ><button
+                aria-label="Copy check the binary command"
+                class="copy-command"
+                hidden=""
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  fill="none"
+                  height="14"
+                  stroke="currentColor"
+                  stroke-width="1.2"
+                  viewBox="0 0 16 16"
+                  width="14"
+                >
+                  <rect height="8" rx="1" width="8" x="5.5" y="5.5"></rect>
+                  <path d="M10.5 3V2.5h-8v8H3"></path></svg
+                ><span>Copy</span>
+              </button>
+            </figcaption>
+            <pre
+              aria-labelledby="prepare-label"
+              tabindex="0"
+            ><code>chmod +x rbitcoin-node rbitcoin-cli
+./rbitcoin-node --help</code></pre>
+            <p aria-live="polite" class="copy-status" role="status"></p>
+          </figure>
+          <p class="annotation">
+            You should see the command-line help. Run the remaining commands from this directory.
+          </p>
+          <p class="annotation">
+            <strong>Already running rbitcoin?</strong> Read the
+            <a
+              data-release-doc="CHANGELOG.md"
+              href="https://github.com/reardencode/rbitcoin/blob/master/CHANGELOG.md"
+              >upgrade notes</a
+            >
+            before opening an existing data directory. Some upgrades require rebuilding the archive.
+          </p>
+          <details class="build-option" id="build">
+            <summary>Build with Nix instead</summary>
+            <p>
+              With Git and Nix installed on Linux x86_64, build the release from its pinned source
+              and lockfile. This is the reproducible Linux build path.
+            </p>
+            <p class="annotation" data-release-fallback="">
+              Replace RELEASE_TAG with the tag shown on the
+              <a href="https://github.com/reardencode/rbitcoin/releases/latest">release page</a>.
+            </p>
+            <figure class="command-block">
+              <figcaption>
+                <span id="nix-build-label">Build with Nix</span
+                ><button
+                  aria-label="Copy build with nix command"
+                  class="copy-command"
+                  hidden=""
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    fill="none"
+                    height="14"
+                    stroke="currentColor"
+                    stroke-width="1.2"
+                    viewBox="0 0 16 16"
+                    width="14"
+                  >
+                    <rect height="8" rx="1" width="8" x="5.5" y="5.5"></rect>
+                    <path d="M10.5 3V2.5h-8v8H3"></path></svg
+                  ><span>Copy</span>
+                </button>
+              </figcaption>
+              <pre
+                aria-labelledby="nix-build-label"
+                tabindex="0"
+              ><code>git clone --branch <span data-release-tag="">RELEASE_TAG</span> --depth 1 \
   https://github.com/reardencode/rbitcoin.git
 cd rbitcoin
 nix build .#rbitcoin-musl
 cp result/bin/rbitcoin-node result/bin/rbitcoin-cli .
-./rbitcoin-node --help</code></pre><p class="copy-status" role="status" aria-live="polite"></p></figure><p>Continue below from the cloned <code>rbitcoin</code> directory. The musl build is static and can run without Nix. Use this build for portable binaries; a regular build inside a Nix shell may depend on Nix’s libraries. <a href="https://github.com/reardencode/rbitcoin/blob/v0.7.0/docs/reproducible-builds.md">Reproducible build guide</a>.</p></details>
-</section>
-<section id="signet"><h2>Try signet</h2><p>Signet is a Bitcoin test network. This two-minute run checks that the node starts, connects to peers, and begins syncing.</p><figure class="command-block"><figcaption><span id="run-signet-label">Run on signet</span><button class="copy-command" type="button" aria-label="Copy run on signet command" hidden><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 3V2.5h-8v8H3"/></svg><span>Copy</span></button></figcaption><pre tabindex="0" aria-labelledby="run-signet-label"><code>./rbitcoin-node --datadir ./datadir-signet \
+./rbitcoin-node --help</code></pre>
+              <p aria-live="polite" class="copy-status" role="status"></p>
+            </figure>
+            <p>
+              Continue below from the cloned <code>rbitcoin</code> directory. The musl build is
+              static and can run without Nix. Use this build for portable binaries; a regular build
+              inside a Nix shell may depend on Nix’s libraries.
+              <a
+                data-release-doc="docs/reproducible-builds.md"
+                href="https://github.com/reardencode/rbitcoin/blob/master/docs/reproducible-builds.md"
+                >Reproducible build guide</a
+              >.
+            </p>
+          </details>
+        </section>
+        <section id="signet">
+          <h2>Try signet</h2>
+          <p>
+            Signet is a Bitcoin test network. This two-minute run checks that the node starts,
+            connects to peers, and begins syncing.
+          </p>
+          <figure class="command-block">
+            <figcaption>
+              <span id="run-signet-label">Run on signet</span
+              ><button
+                aria-label="Copy run on signet command"
+                class="copy-command"
+                hidden=""
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  fill="none"
+                  height="14"
+                  stroke="currentColor"
+                  stroke-width="1.2"
+                  viewBox="0 0 16 16"
+                  width="14"
+                >
+                  <rect height="8" rx="1" width="8" x="5.5" y="5.5"></rect>
+                  <path d="M10.5 3V2.5h-8v8H3"></path></svg
+                ><span>Copy</span>
+              </button>
+            </figcaption>
+            <pre
+              aria-labelledby="run-signet-label"
+              tabindex="0"
+            ><code>./rbitcoin-node --datadir ./datadir-signet \
   --network signet --listen 127.0.0.1:38333 \
-  --milestone 0 --max-run-secs 120</code></pre><p class="copy-status" role="status" aria-live="polite"></p></figure><p class="annotation"><code>--milestone 0</code> enables all historical script checks. Wallet interfaces stay off for this first run.</p></section>
-<section id="sync"><h2>Keep syncing</h2><p>Look for <code>ibd: progress</code> messages in the terminal as syncing gets underway. The process stops after two minutes; that does not mean syncing is complete. If there is no progress, check the <a href="https://github.com/reardencode/rbitcoin/blob/v0.7.0/OPERATOR.md#logging">operator guide</a>.</p><p>To continue, run the same command without <code>--max-run-secs 120</code>. Press Ctrl+C to stop. Restart with the same <code>--datadir</code> to resume.</p></section>
-<section id="mainnet"><h2>Before mainnet</h2><p id="requirements">Plan for a 1 TB-class disk, with room for growth. This release keeps a full archive; wallet indexes need extra space while building. <a href="../architecture/index.html#storage">Storage requirements</a>.</p><p>rbitcoin is an independent consensus implementation and is still pre-1.0. A short signet run is only a first check. Before relying on mainnet, compare with another node and monitor reorgs and free disk space. Use a separate mainnet data directory and follow the <a href="https://github.com/reardencode/rbitcoin/blob/v0.7.0/docs/experimental-mainnet.md">mainnet runbook</a>.</p><p>In v0.7.0, the mainnet default skips script and signature checks at or below block 840,000. Other checks still run. Set <code>--milestone 0</code> to check every historical script. <a href="../security/index.html#milestone">About validation defaults</a>.</p></section>
-
-<nav class="chapter-next" aria-label="Continue reading"><a href="../wallets/index.html">Next: connect a wallet →</a><a href="../index.html">Back to home</a></nav>
-</main></div><footer class="site-colophon"><span>By <a href="https://x.com/reardencode">reardencode</a></span><nav aria-label="Project information"><a href="../about/index.html#donate">Donate</a><a href="https://github.com/reardencode/rbitcoin">Source <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12 12 4M4 4h8v8"/></svg></a><a href="../NOTICE.txt">License</a><button class="theme-toggle" type="button" aria-label="Switch color theme" hidden><svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg><span>Dark</span></button></nav></footer></body></html>
+  --milestone 0 --max-run-secs 120</code></pre>
+            <p aria-live="polite" class="copy-status" role="status"></p>
+          </figure>
+          <p class="annotation">
+            <code>--milestone 0</code> enables all historical script checks. Wallet interfaces stay
+            off for this first run.
+          </p>
+        </section>
+        <section id="sync">
+          <h2>Keep syncing</h2>
+          <p>
+            Look for <code>ibd: progress</code> messages in the terminal as syncing gets underway.
+            The process stops after two minutes; that does not mean syncing is complete. If there is
+            no progress, check the
+            <a
+              data-release-doc="OPERATOR.md#logging"
+              href="https://github.com/reardencode/rbitcoin/blob/master/OPERATOR.md#logging"
+              >operator guide</a
+            >.
+          </p>
+          <p>
+            To continue, run the same command without <code>--max-run-secs 120</code>. Press Ctrl+C
+            to stop. Restart with the same <code>--datadir</code> to resume.
+          </p>
+        </section>
+        <section id="mainnet">
+          <h2>Before mainnet</h2>
+          <p id="requirements">
+            Plan for a 1 TB-class disk, with room for growth. This release keeps a full archive;
+            wallet indexes need extra space while building.
+            <a href="../architecture/index.html#storage">Storage requirements</a>.
+          </p>
+          <p>
+            rbitcoin is an independent consensus implementation and is still pre-1.0. A short signet
+            run is only a first check. Operators may want another node in view until they are
+            satisfied with chain agreement. Monitor reorgs and free disk space. Use a separate
+            mainnet data directory and follow the
+            <a
+              data-release-doc="docs/experimental-mainnet.md"
+              href="https://github.com/reardencode/rbitcoin/blob/master/docs/experimental-mainnet.md"
+              >mainnet runbook</a
+            >.
+          </p>
+          <p>
+            The mainnet default skips script and signature checks at or below block 840,000. Other
+            checks still run. Set <code>--milestone 0</code> to check every historical script.
+            <a href="../security/index.html#milestone">About validation defaults</a>.
+          </p>
+        </section>
+        <nav aria-label="Continue reading" class="chapter-next">
+          <a href="../wallets/index.html">Next: connect a wallet →</a
+          ><a href="../index.html">Back to home</a>
+        </nav>
+      </main>
+    </div>
+    <footer class="site-colophon">
+      <span>By <a href="https://x.com/reardencode">reardencode</a></span>
+      <nav aria-label="Project information">
+        <a href="../about/index.html#donate">Donate</a
+        ><a class="source-link" href="https://github.com/reardencode/rbitcoin"
+          ><span>Source</span
+          ><svg
+            aria-hidden="true"
+            class="link-icon"
+            fill="none"
+            focusable="false"
+            height="12"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.4"
+            viewBox="0 0 16 16"
+            width="12"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M4 12 12 4M4 4h8v8"></path></svg></a
+        ><a href="../NOTICE.txt">License</a
+        ><button aria-label="Switch color theme" class="theme-toggle" hidden="" type="button">
+          <span class="theme-label">Dark</span
+          ><span aria-hidden="true" class="theme-symbol">☾</span>
+        </button>
+      </nav>
+    </footer>
+  </body>
+</html>
