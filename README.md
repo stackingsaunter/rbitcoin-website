@@ -26,12 +26,14 @@ Use the sun / moon Light / Dark button in the footer on any page. Before a manua
 - `get-started/`, `architecture/`, `wallets/`, `security/`, `about/` — reading pages, each with its own `index.html`.
 - `assets/site.css` — Essential typography, light/dark palettes, responsive layout, and print styles.
 - `assets/theme.js` — system theme detection, switching, and saved preference.
-- `assets/wordmark-light.svg` — supplied Logo-1.svg for light mode, with accent #C3502A.
-- `assets/wordmark-dark.svg` — supplied Logo.svg for dark mode, with accent #EC7F5B.
+- `assets/code-copy.js` — accessible copy controls for Get started and Wallet backends commands.
+- `assets/output-history.js` — interactive Architecture example; all states remain readable without JavaScript and in print.
+- `assets/wordmark-light.svg` — supplied rbitcoin-logo-light-mode.svg for light mode.
+- `assets/wordmark-dark.svg` — supplied rbitcoin-logo-dark-mode.svg for dark mode.
 - `NOTICE.txt` — original copyright and license notice.
 
 The supplied Essential HTML and CSS are the source of this version. Other design directions, comparison links, and the comparison footer have been removed. The document content and Essential reading layouts are preserved. Page titles no longer carry a design-variant label, and the original hosted comparison site's canonical URLs have been removed.
 
 The pages retain the original `noindex,nofollow` setting for local review. Set the intended indexing policy and canonical domain before publishing this folder as a public website.
 
-Content was reviewed on 19 September 2026 in the supplied source; this package does not refresh technical claims. Refer to the linked official documentation for current operational guidance.
+Original content was reviewed on 19 September 2026 in the supplied source. Get started was revised on 24 September 2026 against the v0.7.0 release documentation; its shell examples have not been used here to run a node. Refer to the linked official documentation for current operational guidance.
